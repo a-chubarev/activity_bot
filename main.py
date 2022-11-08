@@ -1,7 +1,6 @@
 from preferences import bot_change_settings as bot_pref
 from aiogram.utils import executor
 from preferences.bot_authorization import bot_dp
-from preferences.bot_authorization import bot
 from aiogram import types
 from tag_list import processing_tag_list
 
@@ -21,8 +20,9 @@ async def remove_user_in_tag_list(message: types.Message):
 
 @bot_dp.message_handler(commands=['call_users_from_tag_list'])
 async def remove_user_in_tag_list(message: types.Message):
-    await message.answer(processing_tag_list.return_tag_list(message))
+    await message.answer(processing_tag_list.return_tag_list(message), parse_mode='HTML')
     await message.delete()
+
 
 
 # TODO: handler: open_keyboard

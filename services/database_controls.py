@@ -1,6 +1,6 @@
 import sqlite3
 
-db_path = f'../file_storage/db_storage.db'
+db_path = f'./file_storage/db_storage.db'
 member_db = sqlite3.connect(f'{db_path}')
 cur = member_db.cursor()
 

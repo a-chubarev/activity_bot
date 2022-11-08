@@ -1,7 +1,7 @@
 import os
 import configparser
 
-preferences_path = '../file_storage/bot preferences.ini'
+preferences_path = './file_storage/bot preferences.ini'
 
 
 def checking_preferences_file(pref_path):
