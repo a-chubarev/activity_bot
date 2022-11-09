@@ -6,6 +6,8 @@ import tag_list.tag_list_database_queries as tl_db_queries
 
 
 def add_member_in_tag_list(message: types.Message):
+    """Метод добавляет юзера в тег лист. Возвращает сообщение, если связь юзер-чат есть. Апдейтит инфо о чате и
+    юзере. """
     # Чат не групповой
     if not chat_controls.check_chat_is_group(str(message.chat.type)):
         return 'Tag list is only used in group chats!'
