@@ -13,3 +13,8 @@ async def check_member_is_admin(message: types.Message):
     member = await bot.get_chat_member(message.chat.id, message.from_user.id)
     return member.status.lower() == 'creator' or member.status.lower() == 'administrator' or \
                                     member.status.lower() == 'owner'
+
+
+async def delete_message_from_chat(message: types.Message):
+    """Удалить сообщение"""
+    await message.delete()

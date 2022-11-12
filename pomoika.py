@@ -37,3 +37,6 @@ def add_member_in_tag_list(message: types.Message):
         return 'User was added in tag list.'
     else:
         return 'The user is already in the list.'
+
+
+print(r'[#msg_temp][\s]*[#del][\s]*[$][\s]*[\w|\W]*[\s]*[$][\s]*[\w|\W]*[\s]*[$][\s]*[\w|\W]*')
