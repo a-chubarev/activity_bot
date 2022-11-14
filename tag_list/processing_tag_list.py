@@ -9,7 +9,7 @@ def add_member_in_tag_list(message: types.Message):
     """Метод добавляет юзера в тег лист. Возвращает сообщение, если связь юзер-чат есть. Апдейтит инфо о чате и
     юзере. """
     # Чат не групповой
-    if not chat_controls.check_chat_is_group(str(message.chat.type)):
+    if not chat_controls.check_chat_is_group(message):
         return 'Tag list is only used in group chats!'
     # Чат групповой
     # Связи по таблице тег листа нет
@@ -59,7 +59,7 @@ def add_member_in_tag_list(message: types.Message):
 def remove_member_from_tag_list(message: types.Message):
     """Удаляет запись из сводной таблицы tag_list. Не удаляет запись чата и юзера из соответствующих таблиц"""
     # Чат групповой?
-    if not chat_controls.check_chat_is_group(str(message.chat.type)):
+    if not chat_controls.check_chat_is_group(message):
         return 'Tag list is only used in group chats!'
     # Апдейт юзера
     database_controls.update_member_information(str(message.from_user.id),
@@ -85,7 +85,7 @@ def remove_member_from_tag_list(message: types.Message):
 def return_tag_list(message: types.Message):
     """Метод возвращает тег лист для чата. Если у юзера username == none возвращает firstname"""
     # Чат групповой?
-    if not chat_controls.check_chat_is_group(message.chat.type):
+    if not chat_controls.check_chat_is_group(message):
         return 'Tag list is only used in group chats!'
     # Связь чат-юзер есть?
     if tl_db_queries.return_taglist_intersection(str(message.from_user.id),

@@ -4,7 +4,8 @@ from preferences.bot_authorization import bot_dp
 from aiogram import types
 from tag_list import processing_tag_list
 from invalid_message import processing_invalid_message
-
+from help_command import help_command_processing
+from services import chat_controls
 """Инициализация при запуске"""
 bot_pref.initial_check()
 
@@ -25,13 +26,25 @@ async def remove_user_in_tag_list(message: types.Message):
     await message.delete()
 
 
+@bot_dp.message_handler(commands=['open_keyboard'])
+async def remove_user_in_tag_list(message: types.Message):
+    await message.answer(help_command_processing.choice_help_text_message(message), parse_mode='HTML')
+
+
+@bot_dp.message_handler(commands=['help'])
+async def remove_user_in_tag_list(message: types.Message):
+    user_is_admin = await chat_controls.check_member_is_admin(message)
+    await message.answer(help_command_processing.choice_help_text_message(message), parse_mode='HTML')
+
+
+
 # TODO: handler: open_keyboard
 # TODO: handler: select_activity
 # TODO: handler: admin_settings
 # TODO: handler: main_keyboard
 # TODO: handler: activity_inline_keyboard
 # TODO: handler: admin_settings_keyboard
-# TODO: handler: exception_message
+# TODO: handler: help
 @bot_dp.message_handler()
 async def except_message(message: types.Message):
     reply_message_info = processing_invalid_message.return_invalid_message_reply_info(message)

@@ -1,3 +1,4 @@
+import sqlite3
 def add_member_in_tag_list(message: types.Message):
    """Метод добавляет юзера в тег лист. Если чат не групповой - возвращает сообщение с ошибкой"""
     # Чат групповой?
@@ -40,3 +41,30 @@ def add_member_in_tag_list(message: types.Message):
 
 
 print(r'[#msg_temp][\s]*[#del][\s]*[$][\s]*[\w|\W]*[\s]*[$][\s]*[\w|\W]*[\s]*[$][\s]*[\w|\W]*')
+
+
+db_path = f'./file_storage/db_storage.db'
+member_db = sqlite3.connect(f'{db_path}')
+cur = member_db.cursor()
+def return_all_chat_where_user_is_admin(user_id: str):
+    """Возвращает все chat_id, chat_name, где юзер - админ"""
+    cur.execute(f'''
+                        SELECT 
+                            chat_information.chat_id, chat_information.chat_name
+                        FROM
+                            chat_information
+                        INNER JOIN user_is_admin ON user_is_admin.chat_information_id =
+                                                       chat_information.chat_information_id
+                        INNER JOIN members_information ON members_information.members_information_id = 
+                                                          user_is_admin.members_information_id
+                        WHERE
+                            members_information.user_id = "{user_id}"
+                        AND 
+                            user_is_admin.user_admin = "+"
+
+            ''')
+    result = (cur.fetchall())
+    return result
+
+
+print(return_all_chat_where_user_is_admin('227839513'))

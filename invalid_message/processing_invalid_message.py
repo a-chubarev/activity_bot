@@ -92,12 +92,3 @@ def return_invalid_message_intersection(message: types.Message):
         return True
     else:
         return False
-
-
-
-"""def message_from_chat_processing(message: types.Message):
-    if services.chat_controls.check_chat_is_group(message.chat.type) and return_invalid_message_intersection(message):
-        message_reply_info = return_invalid_message_reply_info(message)
-        if message_reply_info is not None:"""
-
-
