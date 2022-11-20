@@ -34,8 +34,7 @@ async def remove_user_in_tag_list(message: types.Message):
 @bot_dp.message_handler(commands=['help'])
 async def remove_user_in_tag_list(message: types.Message):
     user_is_admin = await chat_controls.check_member_is_admin(message)
-    await message.answer(help_command_processing.choice_help_text_message(message), parse_mode='HTML')
-
+    await message.answer(help_command_processing.choice_help_text_message(message, user_is_admin), parse_mode='HTML')
 
 
 # TODO: handler: open_keyboard
@@ -56,7 +55,6 @@ async def except_message(message: types.Message):
         else:
             if reply_message_info[1] != '':
                 await message.reply(reply_message_info[1])
-
 
 
 """Пропуск сообщений, отправленных при отключенном боте"""
